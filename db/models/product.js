@@ -11,8 +11,6 @@ const schema = new Schema({
 	createdDate: {type: Date, default: Date.now}
 });
 
-//const Product = mongoose.model('Product', ProductModelSchema);
-
 const create = (model, item, callback) => {
 	model.where({slug: item.slug}).findOne((err, res) => {
 		if (err) console.log(err);
@@ -28,6 +26,17 @@ const create = (model, item, callback) => {
 	})
 }
 
+const all = (model, callback) => {
+	model.find({}, (err, res) => {
+		if (err) {
+			callback(err, null);
+		} else {
+			callback(null, res);
+		}
+	})
+}
+
 //module.exports.Product = Product;
-module.exports.create = create;
 module.exports.schema = schema;
+module.exports.create = create;
+module.exports.all = all;
