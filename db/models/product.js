@@ -26,6 +26,18 @@ const create = (model, item, callback) => {
 	})
 }
 
+const deleteOne = (model, id, callback) => {
+	model.where({_id: id}).findOne((err, res) => {
+		if (err) console.log(err);
+		console.log('hello', '5bc24683ee474a562fad1eb8');
+		if (res !== null) {
+			model.deleteOne({_id: id}, (err) => {
+				callback(err);
+			})
+		}
+	})	
+}
+
 const all = (model, callback) => {
 	model.find({}, (err, res) => {
 		if (err) {
@@ -39,4 +51,5 @@ const all = (model, callback) => {
 //module.exports.Product = Product;
 module.exports.schema = schema;
 module.exports.create = create;
+module.exports.deleteOne = deleteOne;
 module.exports.all = all;
