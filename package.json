@@ -1,13 +1,17 @@
 {
   "name": "service-product-recommendations",
   "version": "1.0.0",
-  "description": "",
+  "description": "Product recommendations based on Amazon.com, for the FEC",
   "main": "index.js",
   "scripts": {
     "start": "node server/app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rpt-naboo/service-product-recommendations.git"
+  },  
+  "author": "Josh Chen",
   "license": "ISC",
   "dependencies": {
     "express": "^4.16.4",
