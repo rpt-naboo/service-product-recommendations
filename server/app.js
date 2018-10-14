@@ -7,7 +7,7 @@ const db = require('../db/index.js');
 let Product = db.Product;
 let ProductModel = db.ProductModel;
 
-app.get('/api', (req, res)=> {
+app.get('/api/products', (req, res)=> {
 	ProductModel.all(Product, (err, resData)=> {
 		if(err) {
 			res.send('err');
