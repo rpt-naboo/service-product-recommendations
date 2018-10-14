@@ -13,5 +13,5 @@ promise.then((db) => {
 
 var db = mongoose.connection;
 
-
+module.exports.ProductModel = ProductModel;
 module.exports.productCreate = ProductModel.create;
