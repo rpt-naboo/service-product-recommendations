@@ -12,9 +12,6 @@
     "type": "git",
     "url": "git+https://github.com/rpt-naboo/service-product-recommendations.git"
   },
-  "pre-commit": [
-    //"lint"
-  ],
   "author": "Josh Chen",
   "license": "ISC",
   "dependencies": {
