@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "babel-node server/app.js",
+    "dev": "nodemon --exec babel-node server/app.js",
     "lint": "eslint . --ext .js,.jsx",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -34,6 +35,7 @@
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
     "eslint-plugin-react": "^7.11.1",
+    "nodemon": "^1.18.4",
     "pre-commit": "^1.2.2"
   }
 }
