@@ -12,7 +12,7 @@ app.get('/api/products', (req, res)=> {
 		if(err) {
 			res.send('err');
 		} else {
-			res.send(resData)
+			res.send(resData);
 		}		
 	})
 });
