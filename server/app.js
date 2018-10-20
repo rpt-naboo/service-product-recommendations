@@ -22,7 +22,20 @@ app.get('/api/products', (req, res)=> {
 	})
 });
 
+app.get('/api/suggestProducts/:id', (req, res) => {	
+	const id = req.params.id;  //'5bc966caa6944b44e5edf886'
+	console.log(id)
+	SuggestProductModel.get(SuggestProduct, id, (err, resData) =>{
+		if(err) {
+			res.send('err');
+		} else {
+			res.send(resData);
+		}
+	})
+})
+
 app.get('/api/suggestProducts', (req, res) => {
+	console.log('here?')
 	SuggestProductModel.all(SuggestProduct, (err, resData)=> {
 		if(err) {
 			res.send('err');
@@ -32,16 +45,6 @@ app.get('/api/suggestProducts', (req, res) => {
 	})
 });
 
-app.get('/api/suggestProducts/:id', (req, res) => {
-	const id = req.params.id;  //'5bc966caa6944b44e5edf886'
-	SuggestProductModel.get(SuggestProduct, id, (err, resData) =>{
-		if(err) {
-			res.send('err');
-		} else {
-			res.send(resData);
-		}
-	})
-})
 
 app.get('/', (req, res) => {
 	res.send('Hello world!');
