@@ -3,6 +3,8 @@ const app = express();
 const port = 3007;
 const db = require('../db/index.js');
 
+// Serve up the public folder since that's where our client bundle.js file will end up.
+app.use(express.static(__dirname + '/../client/dist'));
 
 let Product = db.Product;
 let ProductModel = db.ProductModel;
