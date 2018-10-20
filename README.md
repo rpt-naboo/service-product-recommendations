@@ -10,3 +10,6 @@
 
 ### Seed data
 1. run `node libs/helpers/import-seed-data.js`
+
+### Test server
+run `npm test-server` 
