@@ -45,7 +45,10 @@ app.get('/', (req, res) => {
 	res.send('Hello world!');
 });
 
-app.listen(port, () => {
-	console.log(`Exapmle app listening on port ${port}!`);
-})
+if (process.env.NODE_ENV !== 'test') {
+	app.listen(port, () => {
+		console.log(`Exapmle app listening on port ${port}!`);
+	})	
+}
 
+module.exports = app;
