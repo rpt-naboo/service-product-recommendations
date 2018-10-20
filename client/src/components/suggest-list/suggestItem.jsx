@@ -3,7 +3,12 @@ import ReactDOM from 'react-dom';
 
 const SuggestItem = (props) => {
 	return (
-		<div>{props.item.name}</div>		
+		<div>
+			<div>{props.item.name}</div>
+			<div>
+				<img src={props.item.desktop_square_image_url}/>
+			</div>
+		</div>		
 	)
 }
 

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
+import SuggestItem from './suggestItem.jsx';
 
 const GET_PATH = '/api/suggestProducts/';
 
@@ -33,7 +34,16 @@ class Suggest extends React.Component {
 
   render() {
     return (
-      <div>Total suggest items: {this.state.data.length}</div>
+      <div>
+        <h1>Total suggest items: {this.state.data.length}</h1>
+        <div>
+          {
+            this.state.data.map((item) => 
+              <SuggestItem item={item.suggestedProduct} key={item._id}/>
+            )          
+          }
+        </div>
+      </div>
     );
   }
 }
