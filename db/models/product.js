@@ -6,30 +6,46 @@ const schema = new Schema({
 	name: String,
 	slug: {type: String, unique: true},
 	desktop_square_image_url: String,
-	description: String,	
+	description: String,
 	updateDate: {type: Date, default: Date.now},
 	createdDate: {type: Date, default: Date.now}
 });
 
-const create = (model, item, callback) => {
-	model.where({slug: item.slug}).findOne((err, res) => {
-		if (err) console.log(err);
-		if (res === null) {
-			model.create(item, (err, res) => {
-				if (err) {
-					callback(err, null);
-				} else {
-					callback(null, res);
-				}
-			});
-		}
-	})
+// const create = (model, item, callback) => {
+// 	model.where({slug: item.slug}).findOne((err, res) => {
+// 		if (err) console.log(err);
+// 		if (res === null) {
+// 			model.create(item, (err, res) => {
+// 				if (err) {
+// 					callback(err, null);
+// 				} else {
+// 					callback(null, res);
+// 				}
+// 			});
+// 		}
+// 	})
+// }
+
+const create = (model , item, callback) => {
+	return model
+		.findOne({slug: item.slug})
+		.then((doc) => {
+			if (doc === null) {
+				var newItem = new model(item);
+				return newItem.save();
+			}
+		})
+		.then((product) => {
+			return product;
+		})
+		.catch((err) => {
+			return err;
+		})
 }
 
 const deleteOne = (model, id, callback) => {
 	model.where({_id: id}).findOne((err, res) => {
 		if (err) console.log(err);
-		console.log('hello', '5bc24683ee474a562fad1eb8');
 		if (res !== null) {
 			model.deleteOne({_id: id}, (err) => {
 				callback(err);
