@@ -6,7 +6,8 @@
   "scripts": {
     "start": "babel-node server/app.js",
     "dev": "nodemon --exec babel-node server/app.js",
-    "lint": "eslint . --ext .js,.jsx"
+    "lint": "eslint . --ext .js,.jsx",
+    "test-server": "NODE_ENV=test jest server/app.test.js --detectOpenHandles --forceExit"
   },
   "repository": {
     "type": "git",
@@ -15,6 +16,7 @@
   "author": "Josh Chen",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "babel-cli": "^6.26.0",
     "babel-core": "^6.26.3",
     "babel-loader": "^8.0.4",
@@ -32,6 +34,7 @@
     "react": "^16.5.2",
     "react-dom": "^16.5.2",
     "style-loader": "^0.23.1",
+    "supertest": "^3.3.0",
     "svg-inline-loader": "^0.8.0",
     "underscore": "^1.9.1",
     "webpack": "^4.20.2"
