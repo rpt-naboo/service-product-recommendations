@@ -12,9 +12,13 @@ class Suggest extends React.Component {
     	'text': 'Suggests',
       'id': '5bc966caa6944b44e5edf886',
       'data': [],
+      'displayData': [],
+      'currentPageNumber': 1,
+      'itemPerPage': 4,
       'widgetWidth': 0
     }
     this.get = this.get.bind(this);
+    this.getDisplayData = this.getDisplayData.bind(this);
   }
 
   componentDidMount() {
@@ -25,8 +29,15 @@ class Suggest extends React.Component {
   handleResize() {
     window.addEventListener("resize", () => {
       const widgetWidth = document.getElementById('widget').clientWidth;
-      console.log(widgetWidth)
+      console.log(widgetWidth);
     })
+  }
+
+  getDisplayData() {
+    const fromId = (this.state.currentPageNumber - 1) * this.state.itemPerPage;
+    const toId = (this.state.currentPageNumber) * this.state.itemPerPage;
+    const displayData = this.state.data.slice(fromId, toId);
+    return displayData;
   }
 
   get() {
@@ -35,7 +46,10 @@ class Suggest extends React.Component {
     const widgetWidth = document.getElementById('widget').clientWidth;
     axios.get(GET_PATH+id)
     .then((res) => {
-      _this.setState({data: res.data, widgetWidth: widgetWidth})
+      _this.setState({data: res.data, widgetWidth: widgetWidth}, () => {
+        const displayData = _this.getDisplayData();
+        _this.setState({displayData: displayData});
+      })
     })
     .catch((err) => {
       console.log(err);
@@ -46,9 +60,9 @@ class Suggest extends React.Component {
     return (
       <div>
         <h1>Total suggest items: {this.state.data.length}</h1>
-        <div id="widget">
+        <div id="widget" className="row">                
           {
-            this.state.data.map((item) => 
+            this.state.displayData.map((item) => 
               <SuggestItem item={item.suggestedProduct} key={item._id}/>
             )          
           }
