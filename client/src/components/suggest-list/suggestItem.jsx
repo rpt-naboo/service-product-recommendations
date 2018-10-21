@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom';
 
 const divStyle = {
 	width: '200px',
-	'margin-right': '10px'
+	'marginRight': '10px'
 }
 
 const SuggestItem = (props) => {
