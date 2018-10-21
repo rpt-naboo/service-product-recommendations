@@ -13,7 +13,7 @@ class App extends React.Component {
 
   render() {    
     return (
-      <div>
+      <div className="container">
       	<p>{this.state.text}</p>
         <Suggest/>
       </div>
