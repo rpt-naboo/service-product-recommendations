@@ -9,13 +9,13 @@ const db = require('../db/index.js');
 // app.use(express.static(__dirname + '/../client/dist'));
 app.use(express.static(path.join(__dirname, '/../client/dist')));
 
-// const Product = db.Product;
-// const ProductModel = db.ProductModel;
-const { Product, ProductModel } = db.SuggestProduct;
-// const SuggestProduct = db.SuggestProduct;
-// const SuggestProductModel = db.SuggestProductModel;
+const Product = db.Product;
+const ProductModel = db.ProductModel;
+// const { Product, ProductModel } = db.SuggestProduct;
+const SuggestProduct = db.SuggestProduct;
+const SuggestProductModel = db.SuggestProductModel;
 
-const { SuggestProduct, SuggestProductModel } = db.SuggestProduct;
+// const { SuggestProduct, SuggestProductModel } = db.SuggestProduct;
 
 app.get('/api/products', (req, res) => {
   ProductModel.all(Product, (err, resData) => {
@@ -29,7 +29,7 @@ app.get('/api/products', (req, res) => {
 
 app.get('/api/suggestProducts/:id', (req, res) => {
   // '5bc966caa6944b44e5edf886'
-  const { id } = req.params.id;
+  const id = req.params.id;
   SuggestProductModel.get(SuggestProduct, id, (err, resData) => {
     if (err) {
       res.send('err');
