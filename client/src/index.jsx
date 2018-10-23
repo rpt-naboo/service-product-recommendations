@@ -1,21 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Suggest from './components/suggest-list/suggest.jsx';
-
+import Suggest from './components/suggest-list/suggest';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	'text': 'Hello world'
-    }
+      text: 'Hello world',
+    };
   }
 
-  render() {    
+  render() {
     return (
       <div className="container">
-      	<p>{this.state.text}</p>
-        <Suggest/>
+        <p>{ this.state.text }</p>
+        <Suggest />
       </div>
     );
   }

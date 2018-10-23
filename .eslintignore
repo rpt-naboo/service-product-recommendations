@@ -6,6 +6,7 @@ build/
 client/dist
 .env
 *.DS_Store
-client/
-db/
+client/dist/
+client/src/components/suggest-list/suggest.jsx
 libs/
+db/models/

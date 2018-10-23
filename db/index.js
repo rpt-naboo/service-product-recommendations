@@ -9,14 +9,14 @@ const promise = mongoose.connect(mongoDB);
 promise.then((db) => {
   if (db.connections.length) {
     console.log('woohoo mongoose connected successfully');
-  }  
+  }
 }).catch((err) => {
   if (err) {
     console.log('mongoose connection error, please make sure your mongodb is running.');
-  }  
+  }
 });
 
-const db = mongoose.connection;
+// const db = mongoose.connection;
 
 const Product = mongoose.model('Product', ProductModel.schema);
 const SuggestProduct = mongoose.model('SuggestProduct', SuggestProductModel.schema);

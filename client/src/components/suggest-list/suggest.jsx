@@ -1,8 +1,7 @@
 import React from 'react';
-import ReactDOM from 'react-dom';
 import axios from 'axios';
-import SuggestItem from './suggestItem.jsx';
-import PageHandler from './page-handler.jsx';
+import SuggestItem from './suggestItem';
+import PageHandler from './page-handler';
 
 const GET_PATH = '/api/suggestProducts/';
 
@@ -10,29 +9,30 @@ class Suggest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-    	'text': 'Suggests',
-      'id': '5bc966caa6944b44e5edf886',
-      'data': [],
-      'displayData': [],
-      'currentPageNumber': 1,
-      'itemPerPage': 4,
-      'widgetWidth': 0
-    }
+      id: '5bc966caa6944b44e5edf886',
+      data: [],
+      displayData: [],
+      currentPageNumber: 1,
+      itemPerPage: 4,
+      widgetWidth: 0,
+    };
+
     this.get = this.get.bind(this);
-    this.getDisplayData = this.getDisplayData.bind(this);
     this.handlePageActionClick = this.handlePageActionClick.bind(this);
+    this.getDisplayData = this.getDisplayData.bind(this);
+    this.handleResize = this.handleResize.bind(this);
   }
 
   componentDidMount() {
-    this.get();    
+    this.get();
     this.handleResize();
   }
 
-  handleResize() {
-    window.addEventListener("resize", () => {
-      const widgetWidth = document.getElementById('widget').clientWidth;
-      console.log(widgetWidth);
-    });
+  getDisplayData(currentPageNumber, itemPerPage, data) {
+    const fromId = (currentPageNumber - 1) * itemPerPage;
+    const toId = (currentPageNumber) * itemPerPage;
+    const displayData = data.slice(fromId, toId);
+    return displayData;
   }
 
   handlePageActionClick(num) {
@@ -44,11 +44,11 @@ class Suggest extends React.Component {
     this.setState({displayData: displayData, currentPageNumber: currentPageNumber});
   }
 
-  getDisplayData(currentPageNumber, itemPerPage, data) {
-    const fromId = (currentPageNumber - 1) * itemPerPage;
-    const toId = (currentPageNumber) * itemPerPage;
-    const displayData = data.slice(fromId, toId);
-    return displayData;
+  handleResize() {
+    window.addEventListener("resize", () => {
+      const widgetWidth = document.getElementById('widget').clientWidth;
+      console.log(widgetWidth);
+    });
   }
 
   get() {
