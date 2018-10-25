@@ -15,4 +15,10 @@ module.exports = {
       .then(products => res.status(200).send(products))
       .catch(error => res.status(400).send(error));
   },
+  get(req, res) {
+    return Product
+      .findAll({where: {id: req.params.id}})
+      .then(products => res.status(200).send(products))
+      .catch(error => res.status(400).send(error));
+  }
 };
