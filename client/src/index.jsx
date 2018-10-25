@@ -5,15 +5,11 @@ import Suggest from './components/suggest-list/suggest';
 class App extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {
-      text: 'Hello world',
-    };
   }
 
   render() {
     return (
       <div className="container">
-        <p>{ this.state.text }</p>
         <Suggest />
       </div>
     );
