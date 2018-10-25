@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({ extended: false }));
 
 const port = 3007;
 // Serve up the public folder since that's where our client bundle.js file will end up.
-// app.use(express.static(path.join(__dirname, '/../client/dist')));
+app.use(express.static(path.join(__dirname, '/../client/dist')));
 
 require('./routes')(app);
 app.get('*', (req, res) => res.status(200).send({
