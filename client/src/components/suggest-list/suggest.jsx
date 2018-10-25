@@ -3,7 +3,8 @@ import axios from 'axios';
 import SuggestItem from './suggestItem';
 import PageHandler from './page-handler';
 
-const GET_PATH = '/api/suggestProducts/';
+const GET_PATH = '/api/suggestions/';
+const PRODUCT_GET_PATH = '/api/products';
 
 class Suggest extends React.Component {
   constructor(props) {
@@ -57,17 +58,28 @@ class Suggest extends React.Component {
     const currentPageNumber = _this.state.currentPageNumber;
     const itemPerPage = _this.state.itemPerPage;    
     const widgetWidth = document.getElementById('widget').clientWidth;
+    
     axios.get(GET_PATH+id)
     .then((res) => {
-      _this.setState({data: res.data, widgetWidth: widgetWidth}, () => {
-        const displayData = _this.getDisplayData(currentPageNumber, itemPerPage, res.data);
-        _this.setState({displayData: displayData});
-      })
+      return res.data
+    })
+    .then((suggestions) => {      
+      for (var i = 0; i < suggestions.length; i++) {
+        var suggestProductId = suggestions[i].suggestProductId;
+        
+      }
     })
     .catch((err) => {
       console.log(err);
     });
   }
+
+  // const suggestions = res.data;
+
+  // _this.setState({data: res.data, widgetWidth: widgetWidth}, () => {
+  //   const displayData = _this.getDisplayData(currentPageNumber, itemPerPage, res.data);
+  //   _this.setState({displayData: displayData});
+  // })
 
   render() {
     return (
