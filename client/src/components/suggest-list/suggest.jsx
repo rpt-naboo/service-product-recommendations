@@ -3,18 +3,18 @@ import axios from 'axios';
 import SuggestItem from './suggestItem';
 import PageHandler from './page-handler';
 
-const GET_PATH = '/api/suggestions/';
-const PRODUCT_GET_PATH = '/api/products';
+const GET_PATH = '/api/suggestions/products/';
+const PRODUCT_GET_PATH = '/api/products/';
 
 class Suggest extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id: '5bc966caa6944b44e5edf886',
+      id: '2',
       data: [],
       displayData: [],
       currentPageNumber: 1,
-      itemPerPage: 4,
+      itemPerPage: 3,
       widgetWidth: 0,
     };
 
@@ -64,22 +64,33 @@ class Suggest extends React.Component {
       return res.data
     })
     .then((suggestions) => {      
+      let promises = [];
       for (var i = 0; i < suggestions.length; i++) {
-        var suggestProductId = suggestions[i].suggestProductId;
-        
+        var suggestProductPath = PRODUCT_GET_PATH+suggestions[i].suggestProductId;
+        promises.push(axios.get(suggestProductPath));
       }
+      axios.all(promises)
+        .then(axios.spread((...args) => {
+          let data = [];
+          for (var j = 0; j < args.length; j++) {
+            data.push(args[j].data[0]);
+          }
+          return data;
+        }))
+        .then((data) => {
+          _this.setState({data: data, widgetWidth: widgetWidth}, () => {
+            const displayData = _this.getDisplayData(currentPageNumber, itemPerPage, data);
+            _this.setState({displayData: displayData});
+          })          
+        })
+        .catch((err) => {
+          console.log(err);
+        })
     })
     .catch((err) => {
       console.log(err);
     });
   }
-
-  // const suggestions = res.data;
-
-  // _this.setState({data: res.data, widgetWidth: widgetWidth}, () => {
-  //   const displayData = _this.getDisplayData(currentPageNumber, itemPerPage, res.data);
-  //   _this.setState({displayData: displayData});
-  // })
 
   render() {
     return (
@@ -87,12 +98,12 @@ class Suggest extends React.Component {
         <h1>Total suggest items: {this.state.data.length}</h1>
         <div id="widget" className="row align-items-center">     
           <PageHandler actionTitle='Prev' pageNum="-1" clickHandler={this.handlePageActionClick}/>
-            {
-              this.state.displayData.map((item) => 
-                <SuggestItem item={item.suggestedProduct} key={item._id}/>
-              )          
-            }
-          <PageHandler actionTitle='Next' pageNum="1" clickHandler={this.handlePageActionClick}/>
+              {
+                this.state.displayData.map((item) => 
+                  <SuggestItem item={item} key={item._id}/>
+                )          
+              }
+            <PageHandler actionTitle='Next' pageNum="1" clickHandler={this.handlePageActionClick}/>
         </div>
       </div>
     );
