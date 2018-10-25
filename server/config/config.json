@@ -10,7 +10,7 @@
   "test": {
     "username": null,
     "password": null,
-    "database": "database_test",
+    "database": "naboo_dev",
     "host": "127.0.0.1",
     "port": 5432,
     "dialect": "postgres"
