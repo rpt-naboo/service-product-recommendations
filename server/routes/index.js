@@ -10,5 +10,5 @@ module.exports = (app) => {
   app.post('/api/products', productsController.create);
   app.get('/api/products/:id', productsController.get);
   app.get('/api/suggestions', suggestionsController.list);
-  app.get('/api/suggestions/:productId', suggestionsController.get);
+  app.get('/api/suggestions/products/:productId', suggestionsController.get);
 };
