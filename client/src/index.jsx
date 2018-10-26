@@ -10,7 +10,7 @@ class App extends React.Component {
   render() {
     return (
       <div className="container">
-        <Suggest />
+        <Suggest id={7}/>
       </div>
     );
   }
