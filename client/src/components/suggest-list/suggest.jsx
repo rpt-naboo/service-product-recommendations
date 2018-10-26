@@ -24,8 +24,10 @@ class Suggest extends React.Component {
     this.handleResize = this.handleResize.bind(this);
   }
 
-  componentDidMount() {
-    this.get();
+  componentDidMount() { 
+    this.setState({id: this.props.id}, () => {
+      this.get();
+    });    
     this.handleResize();
   }
 
