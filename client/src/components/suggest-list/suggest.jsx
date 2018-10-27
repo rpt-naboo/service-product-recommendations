@@ -3,8 +3,8 @@ import axios from 'axios';
 import SuggestItem from './suggestItem';
 import PageHandler from './page-handler';
 
-const GET_PATH = '/api/suggestions/products/';
-const PRODUCT_GET_PATH = '/api/products/';
+const GET_PATH = 'http://localhost:8080/api/suggestions/products/';
+const PRODUCT_GET_PATH = 'http://localhost:8080/api/products/';
 
 class Suggest extends React.Component {
   constructor(props) {
