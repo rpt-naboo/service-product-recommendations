@@ -102,7 +102,7 @@ class Suggest extends React.Component {
           <PageHandler actionTitle='Prev' pageNum="-1" clickHandler={this.handlePageActionClick}/>
               {
                 this.state.displayData.map((item) => 
-                  <SuggestItem item={item} key={item._id}/>
+                  <SuggestItem item={item} key={item.id}/>
                 )          
               }
             <PageHandler actionTitle='Next' pageNum="1" clickHandler={this.handlePageActionClick}/>
