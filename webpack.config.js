@@ -19,8 +19,12 @@ module.exports = {
         loader: 'babel-loader',
         query: {
           presets: ['@babel/preset-react'],
-        },
+        },        
       },
+      {
+        test: /\.css$/,
+        use: [ 'style-loader', 'css-loader' ]
+      }      
     ],
   },
   resolve: {
