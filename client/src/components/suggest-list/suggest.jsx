@@ -2,6 +2,7 @@ import React from 'react';
 import axios from 'axios';
 import SuggestItem from './suggestItem';
 import PageHandler from './page-handler';
+import css from './css/style.css';
 
 const GET_PATH = 'http://localhost:8080/api/suggestions/products/';
 const PRODUCT_GET_PATH = 'http://localhost:8080/api/products/';
@@ -14,7 +15,7 @@ class Suggest extends React.Component {
       data: [],
       displayData: [],
       currentPageNumber: 1,
-      itemPerPage: 3,
+      itemPerPage: 4,
       widgetWidth: 0,
     };
 
@@ -49,7 +50,7 @@ class Suggest extends React.Component {
 
   handleResize() {
     window.addEventListener("resize", () => {
-      const widgetWidth = document.getElementById('widget').clientWidth;
+      const widgetWidth = document.getElementById('widget-suggestions').clientWidth;
       console.log(widgetWidth);
     });
   }
@@ -59,7 +60,7 @@ class Suggest extends React.Component {
     const id = _this.state.id;
     const currentPageNumber = _this.state.currentPageNumber;
     const itemPerPage = _this.state.itemPerPage;    
-    const widgetWidth = document.getElementById('widget').clientWidth;
+    const widgetWidth = document.getElementById('widget-suggestions').clientWidth;
     
     axios.get(GET_PATH+id)
     .then((res) => {
@@ -98,14 +99,16 @@ class Suggest extends React.Component {
     return (
       <div>
         <h1>Total suggest items: {this.state.data.length}</h1>
-        <div id="widget" className="row align-items-center">     
-          <PageHandler actionTitle='Prev' pageNum="-1" clickHandler={this.handlePageActionClick}/>
-              {
-                this.state.displayData.map((item) => 
-                  <SuggestItem item={item} key={item.id}/>
-                )          
-              }
-            <PageHandler actionTitle='Next' pageNum="1" clickHandler={this.handlePageActionClick}/>
+        <div id="widget-suggestions" className="suggestions-widget">     
+          <PageHandler actionLabel="<" actionClassName='previous' pageNum="-1" clickHandler={this.handlePageActionClick}/>
+          <div className="items">
+            {
+              this.state.displayData.map((item) => 
+                <SuggestItem item={item} key={item.id}/>
+              )          
+            }
+          </div>
+          <PageHandler actionLabel=">" actionClassName='next' pageNum="1" clickHandler={this.handlePageActionClick}/>
         </div>
       </div>
     );

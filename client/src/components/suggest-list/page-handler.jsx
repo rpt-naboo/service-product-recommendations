@@ -6,8 +6,10 @@ const PageHandler = (props) => {
   }
 
   return (
-    <div className="col-1" onClick={handleClick}>
-      { props.actionTitle }
+    <div className="pageHandler">
+      <div className={"pageHandler-button "+props.actionClassName} onClick={handleClick}>
+        {props.actionLabel}
+      </div>    	
     </div>
   );
 };
